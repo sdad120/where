@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha1"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"sort"
 	"strconv"
@@ -43,8 +44,15 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func MessageHandler(w http.ResponseWriter, r *http.Request) {
+	bodyString, _ := ioutil.ReadAll(r.Body)
+	fmt.Printf("%s\n", bodyString)
+	fmt.Fprint(w, "Hello World!")
+}
+
 func main() {
 	http.HandleFunc("/", IndexHandler)
-	http.HandleFunc("/wx", AuthHandler)
+	// http.HandleFunc("/wx", AuthHandler)
+	http.HandleFunc("/wx", MessageHandler)
 	http.ListenAndServe(":80", nil)
 }
