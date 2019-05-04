@@ -33,5 +33,5 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/wx", AuthHandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":80", nil)
 }
